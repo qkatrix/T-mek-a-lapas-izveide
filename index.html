@@ -3,19 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Interactive Page</title>
+    <style>
+        .focused {
+            border: 2px solid blue;
+        }
+        .hovered {
+            background-color: lightgray;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the T-mek-a-lapas-izveide</h1>
-    </header>
-    <main>
-        <h2>Content from Wikipedia</h2>
-        <p>This is an example paragraph containing content from Wikipedia. It could describe a topic or detail from the vast array of articles available on Wikipedia.</p>
-    </main>
-    <footer>
-        <p>&copy; 2026 T-mek-a-lapas-izveide. All rights reserved.</p>
-    </footer>
-    <script src="script.js"></script>
+
+<h1>Interactive Elements Example</h1>
+
+<button id="clickButton">Click Me!</button>
+<button id="hoverButton">Hover over Me!</button>
+
+<input type="text" id="textInput" placeholder="Type something..." />
+<input type="number" id="numberInput" placeholder="Enter a number..." />
+
+<script>
+    // Click Event
+    document.getElementById('clickButton').addEventListener('click', function() {
+        alert('Button clicked!');
+    });
+
+    // Mouseover Event
+    document.getElementById('hoverButton').addEventListener('mouseover', function() {
+        this.classList.add('hovered');
+    });
+
+    // Mouseout Event
+    document.getElementById('hoverButton').addEventListener('mouseout', function() {
+        this.classList.remove('hovered');
+    });
+
+    // Focus Event
+    document.getElementById('textInput').addEventListener('focus', function() {
+        this.classList.add('focused');
+    });
+
+    // Blur Event
+    document.getElementById('textInput').addEventListener('blur', function() {
+        this.classList.remove('focused');
+    });
+
+    // Change Event
+    document.getElementById('numberInput').addEventListener('change', function() {
+        alert('Number changed to: ' + this.value);
+    });
+</script>
+
 </body>
 </html>

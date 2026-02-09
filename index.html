@@ -3,57 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Page</title>
-    <style>
-        .focused {
-            border: 2px solid blue;
-        }
-        .hovered {
-            background-color: lightgray;
-        }
-    </style>
+    <title>JavaScript Functions and Conditional Logic</title>
 </head>
 <body>
+    <h1>JavaScript Functions and Conditional Logic</h1>
+    <h2>Function Examples</h2>
+    <script>
+        // Example of a simple function
+        function greet(name) {
+            return `Hello, ${name}!`;
+        }
+        console.log(greet('World'));
 
-<h1>Interactive Elements Example</h1>
+        // Function with default parameter
+        function add(a, b = 0) {
+            return a + b;
+        }
+        console.log(add(5, 10)); // Output: 15
+        console.log(add(5)); // Output: 5
 
-<button id="clickButton">Click Me!</button>
-<button id="hoverButton">Hover over Me!</button>
+        // Function expression
+        const multiply = function(a, b) {
+            return a * b;
+        };
+        console.log(multiply(4, 5)); // Output: 20
 
-<input type="text" id="textInput" placeholder="Type something..." />
-<input type="number" id="numberInput" placeholder="Enter a number..." />
+        // Arrow function
+        const square = (x) => x * x;
+        console.log(square(4)); // Output: 16
+    </script>
+    <h2>Conditional Logic Examples</h2>
+    <script>
+        // Example of if/else conditional logic
+        const age = 18;
+        if (age < 18) {
+            console.log('You are a minor.');
+        } else if (age === 18) {
+            console.log('You just became an adult!');
+        } else {
+            console.log('You are an adult.');
+        }
 
-<script>
-    // Click Event
-    document.getElementById('clickButton').addEventListener('click', function() {
-        alert('Button clicked!');
-    });
-
-    // Mouseover Event
-    document.getElementById('hoverButton').addEventListener('mouseover', function() {
-        this.classList.add('hovered');
-    });
-
-    // Mouseout Event
-    document.getElementById('hoverButton').addEventListener('mouseout', function() {
-        this.classList.remove('hovered');
-    });
-
-    // Focus Event
-    document.getElementById('textInput').addEventListener('focus', function() {
-        this.classList.add('focused');
-    });
-
-    // Blur Event
-    document.getElementById('textInput').addEventListener('blur', function() {
-        this.classList.remove('focused');
-    });
-
-    // Change Event
-    document.getElementById('numberInput').addEventListener('change', function() {
-        alert('Number changed to: ' + this.value);
-    });
-</script>
-
+        // Ternary operator
+        const isAdult = (age >= 18) ? 'Adult' : 'Minor';
+        console.log(isAdult);
+    </script>
 </body>
 </html>

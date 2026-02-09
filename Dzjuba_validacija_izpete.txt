@@ -1,0 +1,344 @@
+FORMU DATU VALIDĀCIJA UN KĻŪDU APSTRĀDE
+======================================
+
+AUTORE: Jekaterina Dzjuba, 12.b klase
+DATUMS: 2026-02-09
+
+=====================================
+1. UZDEVUMS - DATU VALIDĀCIJAS IZPĒTE
+=====================================
+
+JAUTĀJUMS 1: Paskaidro, kas ir datu validācija.
+===============================================
+
+Definīcija:
+Datu validācija ir process, kurā programma pārbauda, vai lietotāja ievadītie dati atbilst 
+norādītajiem prasībām un standartiem pirms to apstrādes vai saglabāšanas.
+
+Vienkārt sakot:
+Validācija nozīmē "datu pārbaudi" - vai lietotājs ievadīja pareizos datus pareizajā formātā.
+
+Piemēri validācijas:
+✓ Email lauks - pārbauda, vai ir @ zīme
+✓ Parole - pārbauda, vai minimum 8 simboli
+✓ Vecums - pārbauda, vai skaitlis no 1-150
+✓ Telefons - pārbauda, vai ir tikai cipari
+✓ Vārds - pārbauda, vai nav tukšs, satur tikai burtus
+
+Divi validācijas veidi:
+
+A) CLIENT-SIDE VALIDĀCIJA (pārlūkā, JavaScript)
+- Notiek lietotāja datorā
+- Ātra atgriezeniskā saite
+- Uzlabo lietotāja pieredzi
+- PIEMĒRS: JavaScript pārbauda formu pirms sūtīšanas
+
+B) SERVER-SIDE VALIDĀCIJA (serverī, PHP/Python)
+- Notiek serverī
+- Drošāka (lietotājs nevar apiet pārbaudi)
+- Nepieciešama drošībai
+- PIEMĒRS: Serveris pārbauda datus pirms saglabāšanas
+
+Labā prakse: ABAS VALIDĀCIJAS KOPĀ!
+
+
+JAUTĀJUMS 2: Raksturo, kā datu validācija ietekmē programmatūras kvalitāti.
+============================================================================
+
+A) DROŠĪBAS PERSPEKTĪVA
+
+Bez validācijas:
+❌ Nepareizi dati nonāk uz serveri
+❌ SQL injection iespēja
+❌ XSS uzbrukumi
+❌ Sistēma var krasēties
+❌ Lietotāja dati var tikt nozagti
+
+Ar validāciju:
+✅ Tikai pareizi dati tiek apstrādāti
+✅ Sistēma ir aizsargāta pret uzbrukumiem
+✅ Dati ir draudzīgi formāts
+✅ Lietotāja informācija ir droša
+
+PIEMĒRS:
+Bez validācijas:
+- Lietotājs ievada: '); DROP TABLE users; --
+- Serveris izpilda: DELETE no datubāzes!
+- Rezultāts: Dati pazuduši!
+
+Ar validāciju:
+- Lietotājs ievada: '); DROP TABLE users; --
+- Validācija: "❌ Neatļauts zīmju kombinācija!"
+- Dati nav apstrādāti
+- Rezultāts: Sistēma droša!
+
+
+B) DATU INTEGRITĀTES PERSPEKTĪVA
+
+Bez validācijas:
+❌ Datubāzē tukši lauki
+❌ Formāts nav vienots
+❌ Dati nekonsekventi
+❌ Datu analīze neiespējama
+
+Ar validāciju:
+✅ Datubāzē tikai korekti dati
+✅ Vienots formāts
+✅ Konsekventi dati
+✅ Analīze iespējama
+
+PIEMĒRS:
+Bez validācijas datubāzē:
+- Email: "user@"
+- Email: "123"
+- Email: "" (tukšs)
+- Email: "user@example.com"
+- Rezultāts: Messy, neizmantojams!
+
+Ar validāciju datubāzē:
+- Tikai: user1@example.com, user2@example.com, user3@example.com
+- Rezultāts: Tīri, izmantojami dati!
+
+
+C) LIETOTĀJA PIEREDZES PERSPEKTĪVA
+
+Bez validācijas:
+❌ "Forma iesniegta!" → neko nenotika
+❌ Lietotājs nez, kas notika
+❌ Frustration
+❌ Aiziet uz konkurentam
+
+Ar validāciju:
+✅ "❌ Email nav derīgs formāts!"
+✅ Lietotājs zina, kas labot
+✅ Labā pieredze
+✅ Paliek un atgriežas
+
+STATISTIKA: 70% lietotāju aiziet, ja nav skaidro kļūdu paziņojumu!
+
+
+D) DATU KVALITĀTES PERSPEKTĪVA
+
+Bez validācijas:
+❌ Sūtņu dati
+❌ Nepilnīgi dati
+❌ Kļūdas datos
+❌ Sūtņu analīze
+
+Ar validāciju:
+✅ Tīri dati
+✅ Pilnīgi dati
+✅ Bez kļūdu
+✅ Ātra analīze
+
+PIEMĒRS - E-komercija:
+Bez validācijas: 50% pasūtījumu ar nepareizu adresi → nevar piegādāt
+Ar validāciju: 95% pasūtījumu pareizs → sekmīga piegāde
+
+
+E) PROGRAMMATŪRAS UZTICAMĪBAS PERSPEKTĪVA
+
+Bez validācijas:
+❌ Programma var "krēņķēt"
+❌ Kļūdas, kuri nav plānoti
+❌ Sistema ir nestabila
+❌ Investori nevēlas ieguldīt
+
+Ar validāciju:
+✅ Programma darbojas stabili
+✅ Plānotu kļūdu apstrāde
+✅ Sistema ir stabila
+✅ Investori grib ieguldīt
+
+
+SECINĀJUMS:
+Datu validācija PAAUGSTINA programmatūras kvalitāti VISOS aspektos:
+🔐 Drošība
+📊 Datu integritate
+👥 Lietotāja pieredze
+📈 Datu kvalitāte
+⚙️ Sistēmas uzticamība
+
+
+JAUTĀJUMS 3: Nosauc vismaz 3 kļūdainas ievades gadījumus, kas jāņem vērā formās.
+==================================================================================
+
+KĻŪDAINS GADĪJUMS 1: TUKŠI IEVADES LAUKI
+==========================================
+
+Kas notiek:
+Lietotājs neievada neko vai iesniedz tukšu lauku
+
+Piemēri:
+- Vārds lauks: "" (tukšs)
+- Email lauks: "" (tukšs)
+- Parole lauks: "" (tukšs)
+
+Kāpēc tas problēma:
+❌ Neiespējams apstrādāt datus
+❌ Datubāzei vajag informācija
+❌ Nevar sūtīt paziņojumus
+❌ Sistēma var krasēties
+
+Risinājums:
+if (name === "" || name.trim() === "") {
+    alert("❌ Vārds nevar būt tukšs!");
+    return false;
+}
+
+Labais paziņojums:
+"❌ Lūdzu, ievadiet vārdu"
+
+
+KĻŪDAINS GADĪJUMS 2: NEPAREIZS VALIDĀCIJAS FORMĀTS
+====================================================
+
+Kas notiek:
+Lietotājs ievada nepareizu formātu
+
+Piemēri:
+- Email: "user@" (bez domēna)
+- Email: "user.com" (bez @)
+- Telefons: "abc123" (ar burtiem)
+- Vecums: "25a" (ar burtu)
+
+Kāpēc tas problēma:
+❌ Neiespējams nosūtīt email
+❌ Neiespējams zvanīt uz telefonu
+❌ Dati nav matemātiski apstrādājami
+❌ Datubāze nav konsekventā
+
+Risinājums:
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(email)) {
+    alert("❌ Email formāts nav derīgs!");
+    return false;
+}
+
+Labais paziņojums:
+"❌ Lūdzu, ievadiet pareizu email formātu: user@example.com"
+
+
+KĻŪDAINS GADĪJUMS 3: NEPIECIEŠAMAIS GARUMS
+============================================
+
+Kas notiek:
+Ievade ir pārāk īsa vai pārāk gara
+
+Piemēri:
+- Parole: "123" (pārāk īsa, minimum 8)
+- Vārds: "A" (pārāk īss, minimum 2)
+- Ziņojums: pārāk garš (maximum 500 simboli)
+
+Kāpēc tas problēma:
+❌ Parole ir vāja un nav droša
+❌ Vārds nav ticams
+❌ Dati aizņem pārāk daudz vietas
+
+Risinājums:
+if (password.length < 8) {
+    alert("❌ Parole jābūt vismaz 8 simbolus!");
+    return false;
+}
+if (password.length > 50) {
+    alert("❌ Parole pārāk gara (maksimum 50)!");
+    return false;
+}
+
+Labais paziņojums:
+"❌ Parole jābūt 8-50 simbolus garā"
+
+
+KĻŪDAINS GADĪJUMS 4: NEPAREIZS DATU TIPS
+==========================================
+
+Kas notiek:
+Lietotājs ievada datu tipu, kas nav paredzēts
+
+Piemēri:
+- Vecums: "dvidesmit pieci" (vārds, nevis skaitlis)
+- Summa: "$100" (simboli, nevis tikai skaitļi)
+- Datums: "30-02-2026" (nepareizs datums)
+
+Kāpēc tas problēma:
+❌ Matemātiski aprēķini neiespējami
+❌ Neiespējams salīdzināt
+❌ Neiespējams sakārtot
+❌ Dati nav derīgi
+
+Risinājums:
+if (isNaN(age) || age < 1 || age > 150) {
+    alert("❌ Vecums jābūt skaitlim starp 1-150!");
+    return false;
+}
+
+Labais paziņojums:
+"❌ Lūdzu, ievadiet skaitli starp 1-150"
+
+
+KĻŪDAINS GADĪJUMS 5: NEVIENĀDU VĒRTĪBU SALĪDZINĀJUMS
+======================================================
+
+Kas notiek:
+Divas vērtības nesakrīt, kad jābūt vienādām
+
+Piemēri:
+- Parole un Paroles apstiprinājums nav vienādi
+- Email un Email apstiprinājums nav vienādi
+- Jaunā parole un vecā parole ir vienādi
+
+Kāpēc tas problēma:
+❌ Paroles neatbilst
+❌ Email adreses neatbilst
+❌ Cilvēks nejauši viens uz otru
+
+Risinājums:
+if (password !== passwordConfirm) {
+    alert("❌ Paroles nesakrīt!");
+    return false;
+}
+
+Labais paziņojums:
+"❌ Paroles nesakrīt. Lūdzu, pārbaudiet"
+
+
+KĻŪDAINS GADĪJUMS 6: SPECIĀLĀS ZĪMES NEPAREIZĀS VIETĀS
+========================================================
+
+Kas notiek:
+Vārds vai lauki satur pieļautas zīmes
+
+Piemēri:
+- Vārds: "John123" (satur ciparus)
+- Vārds: "John@Doe" (satur @)
+- Email: "user@exam@ple.com" (2x @)
+
+Kāpēc tas problēma:
+❌ Dati nav ticami
+❌ Drošības risks
+❌ Izskatās "hacķināts"
+
+Risinājums:
+if (!/^[a-zA-Z\s]*$/.test(name)) {
+    alert("❌ Vārds drīkst satur tikai burtus!");
+    return false;
+}
+
+Labais paziņojums:
+"❌ Vārds satur nepieļautas zīmes"
+
+
+SECINĀJUMS
+===========
+
+Dati validācijā jāpārbauda:
+1. ✅ Vai lauki nav tukši
+2. ✅ Vai formāts ir pareizs
+3. ✅ Vai garums ir derīgs
+4. ✅ Vai datu tips ir pareizs
+5. ✅ Vai salīdzinājumi sakrīt
+6. ✅ Vai nav nepieļautu zīmju
+7. ✅ Vai obligātie lauki aizpildīti
+8. ✅ Vai tiek atbalstītas diacritiskas zīmes
+
+Labas validācijas veids: KOMBINĒT vairākus pārbaudījumus!
